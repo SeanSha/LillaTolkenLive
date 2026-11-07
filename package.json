@@ -1,0 +1,24 @@
+{
+  "name": "lillatolken-live",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Personal mobile interpreter that translates classroom speech into Chinese audio.",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @lilla/shared && concurrently -k -n server,web -c blue,magenta \"npm run dev -w @lilla/server\" \"npm run dev -w @lilla/web\"",
+    "dev:phone": "npm run build -w @lilla/shared && concurrently -k -n server,web -c blue,magenta \"npm run dev -w @lilla/server\" \"npm run dev:phone -w @lilla/web\"",
+    "build": "npm run build -w @lilla/shared && npm run build -w @lilla/server && npm run build -w @lilla/web",
+    "start": "npm run build && npm run start -w @lilla/server",
+    "typecheck": "npm run build -w @lilla/shared && npm run typecheck -w @lilla/server && npm run typecheck -w @lilla/web",
+    "test": "npm run build -w @lilla/shared && npm run test -w @lilla/shared && npm run test -w @lilla/server && npm run test -w @lilla/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
